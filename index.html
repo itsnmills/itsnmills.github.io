@@ -3,8 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noah Mills | Security Analyst, St. Louis, MO</title>
-<meta name="description" content="Noah Mills, Security+ and Network+ certified security analyst in St. Louis. Builds security operations tooling for healthcare: alert triage, HIPAA readiness, access reviews, AI guardrails.">
+<title>Noah Mills | Healthcare IT &amp; Security, St. Louis</title>
+<meta name="description" content="Noah Mills, Security+ and Network+ certified, in St. Louis. Teaching himself healthcare security by building it: HIPAA readiness, alert triage, access reviews, AI guardrails.">
+<meta property="og:title" content="Noah Mills | Healthcare IT &amp; Security">
+<meta property="og:description" content="Security+ / Network+ certified, in St. Louis. Learning healthcare security by building it: HIPAA readiness, triage, AI governance, PHI guardrails.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://itsnmills.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Noah Mills | Healthcare IT &amp; Security">
+<meta name="twitter:description" content="Security+ / Network+ certified, in St. Louis. Learning healthcare security by building it.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c2401b'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' font-weight='bold' fill='%23f3f0e9' text-anchor='middle'%3ENM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Archivo:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -62,6 +70,17 @@
   .summary .lead-in { font-size: 16.5px; line-height: 1.55; font-weight: 500; }
   .summary .lead-in em { font-style: italic; color: var(--accent); }
 
+  /* "right now" block */
+  .now { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--rule); }
+  .now .now-label {
+    font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em;
+    color: var(--ink-40); display: block; margin-bottom: 10px;
+  }
+  .now ul { list-style: none; }
+  .now li { margin-bottom: 7px; color: var(--ink-60); font-size: 14.5px; }
+  .now li:last-child { margin-bottom: 0; }
+  .now li b { color: var(--ink); font-weight: 600; }
+
   /* section headers */
   h2.sec {
     display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
@@ -83,6 +102,8 @@
   .project .what { margin-top: 6px; max-width: 70ch; }
   .project .value { margin-top: 6px; color: var(--ink-60); max-width: 70ch; }
   .project .value b { color: var(--ink); font-weight: 600; }
+  .project .learned { margin-top: 8px; max-width: 70ch; font-size: 13.5px; color: var(--ink-60); font-style: italic; }
+  .project .learned::before { content: "What it taught me: "; font-style: normal; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-40); }
   .project .stack { font-family: var(--mono); font-size: 12px; color: var(--ink-40); margin-top: 8px; }
 
   /* skills */
@@ -154,12 +175,100 @@
   .rm-actions button:hover { background: var(--paper-2); }
   dialog#resumeModal iframe { width: 100%; height: calc(100% - 49px); border: none; display: block; background: #fff; }
 
+  /* intro: prose column + photo/facts column */
+  .intro { display: grid; grid-template-columns: 1fr 240px; gap: 34px; align-items: start; }
+  .intro-main { min-width: 0; }
+  .intro-main .summary { max-width: none; }
+  .intro-side { padding-top: 30px; }
+  .photo {
+    position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 10px;
+    overflow: hidden; border: 1px solid var(--rule-strong); background: var(--paper-2);
+  }
+  .photo .mono {
+    position: absolute; inset: 0; z-index: 0; display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-weight: 600; font-size: 66px; color: var(--accent); letter-spacing: .02em;
+  }
+  .photo img { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .factcard { margin-top: 16px; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .factcard .fact { padding: 10px 14px; border-bottom: 1px solid var(--rule); }
+  .factcard .fact:last-child { border-bottom: none; }
+  .factcard .ft { display: block; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .09em; color: var(--ink-40); margin-bottom: 3px; }
+  .factcard .fv { font-size: 13.5px; color: var(--ink); line-height: 1.4; }
+  .factcard .fv b { font-weight: 600; }
+
   @media (max-width: 640px) {
     .job { grid-template-columns: 1fr; gap: 2px; }
     table.skills td.k { width: 130px; }
+    .intro { grid-template-columns: 1fr; gap: 20px; }
+    .intro-side { padding-top: 4px; display: grid; grid-template-columns: 128px 1fr; gap: 16px; align-items: start; }
+    .factcard { margin-top: 0; }
+    .photo .mono { font-size: 44px; }
   }
   @media print {
-    .page { padding: 0; }
+    @page { size: letter; margin: 10mm 12mm; }
+    html, body { background: #fff; }
+    body { font-size: 10.2px; line-height: 1.3; }
+    .page { max-width: 100%; padding: 0; }
+
+    /* Flatten tinted fills so the PDF is clean white, not blocks of color
+       that get clipped at page breaks. Borders and accent color still print. */
+    .now, .cred-cell, .photo { background: #fff; }
+    .cred-strip { border-radius: 0; }
+
+    .topline { padding-bottom: 7px; font-size: 9.5px; }
+
+    /* Compact two-column intro */
+    .intro { grid-template-columns: 1fr 150px; gap: 18px; break-inside: avoid; }
+    .intro-side { padding-top: 7px; }
+    .photo { border-radius: 7px; }
+    .photo .mono { font-size: 40px; }
+    .factcard { margin-top: 9px; }
+    .factcard .fact { padding: 5px 9px; }
+    .factcard .ft { font-size: 8.5px; margin-bottom: 1px; }
+    .factcard .fv { font-size: 10px; }
+
+    header.masthead { padding-top: 6px; }
+    header.masthead h1 { font-size: 27px; }
+    header.masthead .role { margin-top: 4px; font-size: 10.5px; }
+    .contactline { margin-top: 7px; font-size: 10px; }
+    .summary { margin-top: 9px; }
+    .summary .lead-in { font-size: 11.5px; line-height: 1.36; }
+    .summary p { margin-bottom: 5px; }
+
+    .now { margin-top: 11px; padding-top: 9px; }
+    .now .now-label { margin-bottom: 5px; }
+    .now li { font-size: 10px; margin-bottom: 2px; }
+
+    h2.sec { margin: 11px 0 2px; padding: 7px 0 4px; font-size: 15px; break-after: avoid; }
+    h2.sec .no { font-size: 8.5px; }
+
+    table.skills td { padding: 3px 0; }
+    table.skills td.k { width: 160px; padding-top: 5px; font-size: 9.5px; }
+    table.skills td.v { font-size: 10px; }
+
+    .value { font-size: 10px; }
+    .project { padding: 6px 0; }
+    .phead h3 { font-size: 13.5px; }
+    .project .what { margin-top: 3px; }
+    .project .learned { margin-top: 3px; font-size: 9.7px; }
+    .project .learned::before { font-size: 8.5px; }
+    .project .stack { margin-top: 3px; font-size: 9.3px; }
+
+    .job { padding: 6px 0; grid-template-columns: 118px 1fr; gap: 14px; }
+    .job p { font-size: 10px; }
+
+    .cred-cell { padding: 6px 10px; }
+    .cred-cell .n { font-size: 11.5px; }
+    .cred-cell .s { font-size: 10px; }
+
+    .cta { margin-top: 11px; padding: 10px 15px; }
+    .cta .msg { font-size: 12px; }
+    footer { margin-top: 9px; font-size: 9.5px; }
+
+    /* Keep related content on the same page */
+    .summary, .now, .project, .job, .cred-strip, .cta,
+    table.skills tr, table.skills td { break-inside: avoid; }
+    h2.sec + p, h2.sec + table, h2.sec + .cred-strip { break-before: avoid; }
     .cta a.btn { border: 1px solid var(--ink); color: var(--ink); background: none; }
   }
 </style>
@@ -168,47 +277,92 @@
 <div class="page">
 
   <div class="topline">
-    <span>Security Operations · GRC · IAM</span>
+    <span>Healthcare IT · Security · GRC</span>
     <span class="avail">Open to work · 2026</span>
   </div>
 
-  <header class="masthead">
-    <h1>Noah Mills</h1>
-    <div class="role">Security Analyst · St. Louis, MO</div>
-    <div class="contactline">
-      <a href="mailto:itsnmills@gmail.com">itsnmills@gmail.com</a>
-      <span class="sep">·</span><a href="https://github.com/itsnmills" target="_blank" rel="noopener">GitHub</a>
-      <span class="sep">·</span><a href="https://linkedin.com/in/noahmills1" target="_blank" rel="noopener">LinkedIn</a>
-      <span class="sep">·</span><a href="Noah_Mills_Resume.pdf" id="resumeOpen">Resume</a>
-    </div>
-  </header>
+  <div class="intro">
+   <div class="intro-main">
+    <header class="masthead">
+      <h1>Noah Mills</h1>
+      <div class="role">Healthcare IT &amp; security · St. Louis, MO</div>
+      <div class="contactline">
+        <a href="mailto:itsnmills@gmail.com">itsnmills@gmail.com</a>
+        <span class="sep">·</span><a href="https://github.com/itsnmills" target="_blank" rel="noopener">GitHub</a>
+        <span class="sep">·</span><a href="https://linkedin.com/in/noahmills1" target="_blank" rel="noopener">LinkedIn</a>
+        <span class="sep">·</span><a href="Noah_Mills_Resume.pdf" id="resumeOpen">Resume</a>
+      </div>
+    </header>
 
-  <div class="summary">
-    <p class="lead-in">I got into security from an unusual angle. I spent a year as a health coach working with people's personal health information every day, and I saw <em>how little protection that data actually gets</em> at small practices.</p>
-    <p>So I started building tools for that problem. I'm <b>Security+ and Network+ certified</b>, I'm finishing my B.S. in IT at WGU, and I've built four working security projects: a HIPAA readiness kit, an alert triage pipeline, a security workspace for small practices, and PHI guardrails for AI agents. Everything I build gets documented like a real analyst handoff, with tickets, evidence, runbooks, and reports.</p>
-    <p>I'm looking for my first full-time security role in SOC, GRC, or IAM. Writing things down clearly matters to me as much as finding the problem.</p>
+    <div class="summary">
+      <p class="lead-in">Technology has been a constant interest of mine, and security most of all. I have a B.S. in Exercise Science and spent time coaching before deciding to go all-in on IT and security, work that <em>actually fits</em> how I think and what I want to get good at.</p>
+      <p>That coaching background turned out to matter more than I expected: handling clients' personal health information every day showed me, up close, how little protection that data gets at small healthcare practices. That's the problem I keep coming back to. I'm <b>Security+ and Network+ certified</b>, finishing a B.S. in Information Technology at WGU, and studying for <b>CompTIA Project+</b> now. To learn the material for real, I've been building. Five projects so far, each one written up as clearly as I can, so someone else could pick it up and follow the reasoning.</p>
+      <p>I'm looking for my first full-time role in IT or security. I don't have the years yet, so I'm trying to make up for it with effort you can see: things built, documented, and shipped in the open. Being able to explain a problem clearly matters to me as much as finding it.</p>
+    </div>
+   </div>
+
+   <aside class="intro-side">
+    <div class="photo">
+      <span class="mono">NM</span>
+      <img src="headshot.jpg" alt="Noah Mills" onerror="this.style.display='none'">
+    </div>
+    <div class="factcard">
+      <div class="fact"><span class="ft">Location</span><span class="fv">St. Louis, MO <span style="color:var(--ink-40)">(Ballwin)</span></span></div>
+      <div class="fact"><span class="ft">Status</span><span class="fv">Open to work · 2026</span></div>
+      <div class="fact"><span class="ft">Certified</span><span class="fv"><b>Security+</b> · <b>Network+</b><br>Project+ in progress</span></div>
+      <div class="fact"><span class="ft">Focus</span><span class="fv">Healthcare security · GRC · AI governance</span></div>
+    </div>
+   </aside>
   </div>
 
-  <h2 class="sec">What I've built <span class="no">01 · four projects</span></h2>
+  <div class="now">
+    <span class="now-label">Right now</span>
+    <ul>
+      <li>Finishing my <b>B.S. in IT at WGU</b> and studying for <b>CompTIA Project+</b>.</li>
+      <li>Going back over the projects below: tighter tests, clearer docs, and honest notes on their limits.</li>
+      <li>Reading real healthcare breach write-ups and folding what I learn back into the readiness kit.</li>
+      <li>Building <b>Pace</b>, an Apple Watch lifting-tempo coach, to teach myself Swift and on-device signal processing.</li>
+    </ul>
+  </div>
+
+  <h2 class="sec">Skills &amp; knowledge <span class="no">01</span></h2>
+  <table class="skills">
+    <tr><td class="k">HIPAA &amp; compliance</td><td class="v">HIPAA Security Rule, ePHI data flow mapping, security risk assessments, vendor and BAA management, policy writing, and remediation planning.</td></tr>
+    <tr><td class="k">Security operations</td><td class="v">Alert triage and prioritization, CVSS, CISA KEV, MITRE ATT&amp;CK mapping, incident documentation, ticketing, and remediation tracking.</td></tr>
+    <tr><td class="k">Identity &amp; access</td><td class="v">Least privilege, role-based access control, MFA, account lifecycle, and evidence-backed access reviews.</td></tr>
+    <tr><td class="k">AI security &amp; governance</td><td class="v">AI vendor risk review, PHI pattern filtering, agent tool permissions, prompt injection risk, and audit logging for AI workflows.</td></tr>
+    <tr><td class="k">Data protection</td><td class="v">AES-256-GCM encryption, SHA-256 integrity verification, redaction, and secure report handoff.</td></tr>
+    <tr><td class="k">Tools &amp; systems</td><td class="v">Python, TypeScript/React, SQL, Git, CI, automated testing. Windows, macOS, Linux, Microsoft 365, Google Workspace.</td></tr>
+  </table>
+
+  <h2 class="sec">What I've been building <span class="no">02 · the Velari suite</span></h2>
+  <p class="value" style="padding: 14px 0 4px; max-width: 70ch;">These started as a way to teach myself the material by actually doing it, and grew into five projects that fit together as the <b>Velari Healthcare Security Suite</b>, a rough end-to-end security readiness workflow for small practices. They're works in progress, and I keep iterating. Public repos include docs, tests, CI, and synthetic, no-PHI data.</p>
 
   <div class="project">
     <div class="phead">
       <h3><a href="https://github.com/itsnmills/small-practice-security-kit" target="_blank" rel="noopener">Small Practice Security Kit</a></h3>
-      <span class="ptag">Public · GitHub</span>
+      <span class="ptag">Public</span>
     </div>
-    <p class="what">Most small practices have no idea where they stand on HIPAA until an audit or an incident forces the question. This toolkit maps out a practice's ePHI flows, vendor and BAA status, MFA and access gaps, and AI usage, then generates a remediation packet the owner can actually use, with a 30/60/90 day plan.</p>
-    <p class="value">The outputs are deterministic and avoid PHI by design, so you can hand a packet to an auditor, insurer, or MSP without worrying about what's inside it.</p>
-    <div class="stack">Python · Flask · Google Workspace / M365 metadata connectors · YAML/JSON validation</div>
+    <p class="what">HIPAA readiness assessments: maps ePHI flows, vendor/BAA status, and access gaps into owner-ready remediation packets with 30/60/90 day plans.</p>
+    <p class="learned">how to translate the HIPAA Security Rule into steps a non-technical practice owner can actually follow.</p>
   </div>
 
   <div class="project">
     <div class="phead">
-      <h3><a href="https://github.com/itsnmills" target="_blank" rel="noopener">Security Operations Triage Pipeline</a></h3>
-      <span class="ptag">Public · GitHub</span>
+      <h3><a href="https://github.com/itsnmills/health-ai-governance-auditor" target="_blank" rel="noopener">HealthAI Audit</a></h3>
+      <span class="ptag">Public · CI + tests</span>
     </div>
-    <p class="what">I wanted to understand how a SOC decides what to work on first, so I built that decision process myself. The pipeline takes alert exports, vulnerability records, CISA KEV data, and asset inventory, scores everything with consistent rules (ransomware relevance, internet exposure, ePHI impact, false positive overrides), and outputs prioritized tickets with MITRE ATT&amp;CK mappings.</p>
-    <p class="value">My favorite part is the handoff. Every bundle ships with SHA-256 integrity manifests and AES-256-GCM encryption, so the transfer from analyst to owner is defensible.</p>
-    <div class="stack">Python · pytest · MITRE ATT&amp;CK · CSV/JSON/HTML/PDF reporting</div>
+    <p class="what">AI governance auditor that scores a practice's AI tools across six risk domains and generates vendor risk cards, an AI use policy, and a vendor questionnaire.</p>
+    <p class="learned">my first time wiring CI and a real test suite around my own scoring logic, and making that scoring explainable instead of a black box.</p>
+  </div>
+
+  <div class="project">
+    <div class="phead">
+      <h3><a href="https://github.com/itsnmills/security-operations-triage-pipeline" target="_blank" rel="noopener">Security Operations Triage Pipeline</a></h3>
+      <span class="ptag">Public · CI + tests</span>
+    </div>
+    <p class="what">Turns scanner and alert exports into prioritized, MITRE ATT&amp;CK-mapped tickets with explainable scoring and encrypted, integrity-verified handoff bundles.</p>
+    <p class="learned">that a lot of triage is really prioritization and a clean handoff, not just detecting things.</p>
   </div>
 
   <div class="project">
@@ -216,31 +370,33 @@
       <h3>Velari Secure Practice OS</h3>
       <span class="ptag private">Private · demo on request</span>
     </div>
-    <p class="what">The biggest thing I've built. A full security workspace for practices that don't have a security team: systems inventory, ePHI flow mapping, vendor and BAA tracking, access reviews, downtime planning, risk treatment, and encrypted evidence management. Everything runs locally with no cloud dependency.</p>
-    <p class="value">One rule I held the whole way through: a practice manager should be able to run their entire security program and produce packets for MSPs, risk assessments, and insurance reviews without uploading patient data anywhere.</p>
-    <div class="stack">TypeScript · React · Vite · WebCrypto AES-GCM</div>
+    <p class="what">Full local-first security program workspace for practices without a security team: inventory, access reviews, risk treatment, and encrypted evidence management.</p>
+    <p class="learned">my most ambitious build, and still the roughest: how much scope a "whole program" really is, and where to cut it down.</p>
   </div>
 
   <div class="project">
     <div class="phead">
-      <h3><a href="https://github.com/itsnmills" target="_blank" rel="noopener">PHI Guardrails for AI Agents</a></h3>
-      <span class="ptag">Public · GitHub</span>
+      <h3><a href="https://github.com/itsnmills/Strands-PHI-Guardrails-Demo" target="_blank" rel="noopener">PHI Guardrails for AI Agents</a></h3>
+      <span class="ptag">Public · CI + demo UI</span>
     </div>
-    <p class="what">Healthcare orgs are adopting AI faster than their policies can keep up, and most "AI safety" is a document nobody enforces. I built actual controls: checks on role, purpose of use, BAA status, sensitivity tier, and PHI patterns that run <em>before</em> an agent executes, with block, redact, or proceed paths and structured audit logs.</p>
-    <p class="value">The idea was to show that minimum necessary access can be enforced in code, with evidence a reviewer can follow, instead of promised in a policy PDF.</p>
-    <div class="stack">Python · Strands Agents · RBAC · audit logging</div>
+    <p class="what">Deterministic RBAC, purpose-of-use, BAA, and PHI pattern checks that run before an AI agent executes, with block/redact/proceed paths and audit logs.</p>
+    <p class="learned">to treat AI safety as deterministic checks that run <em>before</em> the model acts, rather than hoping to catch problems after.</p>
   </div>
 
-  <h2 class="sec">Skills <span class="no">02</span></h2>
-  <table class="skills">
-    <tr><td class="k">Security ops</td><td class="v">Alert triage, SIEM/SOAR workflows, vulnerability prioritization, incident documentation, SOPs, shift handoffs, remediation tracking</td></tr>
-    <tr><td class="k">Identity &amp; access</td><td class="v">MFA, least privilege, account lifecycle, role-based access, access reviews, security change control with evidence-backed documentation</td></tr>
-    <tr><td class="k">Compliance / GRC</td><td class="v">HIPAA Security Rule, PHI/ePHI workflows, BAA and vendor review, risk assessment, downtime and ransomware readiness</td></tr>
-    <tr><td class="k">Automation</td><td class="v">Python, SQL, Git/GitHub, CSV/JSON, Excel, Markdown; dashboards, metrics definitions, data quality checks</td></tr>
-    <tr><td class="k">Systems</td><td class="v">Windows, macOS, Linux, Microsoft 365 administration and troubleshooting</td></tr>
-  </table>
+  <h2 class="sec">Also building <span class="no">03 · Pace</span></h2>
+  <p class="value" style="padding: 14px 0 4px; max-width: 70ch;">Not everything I build is security work. Pace is a personal project that connects my exercise-science background to the engineering side I'm growing into: an Apple Watch and iPhone app that coaches lifting tempo from wrist motion, entirely on-device.</p>
 
-  <h2 class="sec">Work history <span class="no">03</span></h2>
+  <div class="project">
+    <div class="phead">
+      <h3>Pace</h3>
+      <span class="ptag private">Private · in development</span>
+    </div>
+    <p class="what">An Apple Watch movement-coaching prototype. It reads wrist motion during dumbbell curls, detects the lift, top, and lower phases of each rep, and coaches lowering tempo with haptics. All detection runs on the Watch: no account, no network, and no sensor data ever leaves the device.</p>
+    <p class="learned">Swift and watchOS from scratch, and how much care real signal processing takes. I wrote the rep detector as a tested state machine, replay recorded motion as regression fixtures, and kept the docs honest about what the sensors can and can't prove.</p>
+    <p class="stack">Swift · SwiftUI · watchOS · HealthKit · Core Motion · on-device, no network · CI + golden-fixture tests</p>
+  </div>
+
+  <h2 class="sec">Work history <span class="no">04</span></h2>
   <div class="job">
     <span class="dates">2023 – present</span>
     <div>
@@ -256,10 +412,11 @@
     </div>
   </div>
 
-  <h2 class="sec">Certifications &amp; education <span class="no">04</span></h2>
+  <h2 class="sec">Certifications &amp; education <span class="no">05</span></h2>
   <div class="cred-strip">
     <div class="cred-cell"><div class="t">Certification</div><div class="n">CompTIA Security+</div><div class="s">Certified</div></div>
     <div class="cred-cell"><div class="t">Certification</div><div class="n">CompTIA Network+</div><div class="s">Certified</div></div>
+    <div class="cred-cell"><div class="t">Certification</div><div class="n">CompTIA Project+</div><div class="s">In progress</div></div>
     <div class="cred-cell"><div class="t">Degree</div><div class="n">B.S. Information Technology</div><div class="s">WGU, near completion</div></div>
     <div class="cred-cell"><div class="t">Degree</div><div class="n">B.S. Exercise Science</div><div class="s">Maryville University, 2022</div></div>
   </div>

@@ -68,18 +68,16 @@
   .summary p:last-child { margin-bottom: 0; }
   .summary b { font-weight: 600; }
   .summary .lead-in { font-size: 16.5px; line-height: 1.55; font-weight: 500; }
-  .summary .lead-in em { font-style: italic; color: var(--accent); }
 
-  /* "right now" block */
-  .now { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--rule); }
-  .now .now-label {
-    font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em;
-    color: var(--ink-40); display: block; margin-bottom: 10px;
+  /* "right now" grid, styled as a peer of the other sections rather than a callout */
+  .now-grid { display: grid; grid-template-columns: 1fr 1fr; margin-top: 2px; border-top: 1px solid var(--rule-strong); }
+  .now-grid .item {
+    padding: 13px 24px 13px 0; border-bottom: 1px solid var(--rule); font-size: 14px; color: var(--ink-60); line-height: 1.5;
   }
-  .now ul { list-style: none; }
-  .now li { margin-bottom: 7px; color: var(--ink-60); font-size: 14.5px; }
-  .now li:last-child { margin-bottom: 0; }
-  .now li b { color: var(--ink); font-weight: 600; }
+  .now-grid .item:nth-child(odd) { border-right: 1px solid var(--rule); }
+  .now-grid .item:nth-child(even) { padding-left: 24px; }
+  .now-grid .item:nth-last-child(-n+2) { border-bottom: none; }
+  .now-grid .item b { color: var(--ink); font-weight: 600; }
 
   /* section headers */
   h2.sec {
@@ -136,7 +134,6 @@
     display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
   }
   .cta .msg { font-size: 16.5px; font-weight: 600; }
-  .cta .msg em { font-style: italic; color: var(--accent); }
   .cta a.btn {
     font-family: var(--mono); font-size: 13px; text-decoration: none;
     background: var(--ink); color: var(--paper); padding: 11px 20px; border-radius: 6px;
@@ -176,21 +173,21 @@
   dialog#resumeModal iframe { width: 100%; height: calc(100% - 49px); border: none; display: block; background: #fff; }
 
   /* intro: prose column + photo/facts column */
-  .intro { display: grid; grid-template-columns: 1fr 240px; gap: 34px; align-items: start; }
+  .intro { display: grid; grid-template-columns: 1fr 210px; gap: 40px; align-items: start; }
   .intro-main { min-width: 0; }
   .intro-main .summary { max-width: none; }
-  .intro-side { padding-top: 30px; }
+  .intro-side { padding-top: 32px; }
   .photo {
-    position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 10px;
-    overflow: hidden; border: 1px solid var(--rule-strong); background: var(--paper-2);
+    position: relative; width: 100%; aspect-ratio: 1 / 1;
+    border: 1px solid var(--rule-strong);
   }
   .photo .mono {
     position: absolute; inset: 0; z-index: 0; display: flex; align-items: center; justify-content: center;
-    font-family: var(--serif); font-weight: 600; font-size: 66px; color: var(--accent); letter-spacing: .02em;
+    font-family: var(--serif); font-weight: 600; font-size: 52px; color: var(--ink); letter-spacing: .02em;
   }
   .photo img { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; display: block; }
-  .factcard { margin-top: 16px; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
-  .factcard .fact { padding: 10px 14px; border-bottom: 1px solid var(--rule); }
+  .factcard { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--rule-strong); }
+  .factcard .fact { padding: 8px 0; border-bottom: 1px solid var(--rule); }
   .factcard .fact:last-child { border-bottom: none; }
   .factcard .ft { display: block; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .09em; color: var(--ink-40); margin-bottom: 3px; }
   .factcard .fv { font-size: 13.5px; color: var(--ink); line-height: 1.4; }
@@ -200,9 +197,14 @@
     .job { grid-template-columns: 1fr; gap: 2px; }
     table.skills td.k { width: 130px; }
     .intro { grid-template-columns: 1fr; gap: 20px; }
-    .intro-side { padding-top: 4px; display: grid; grid-template-columns: 128px 1fr; gap: 16px; align-items: start; }
-    .factcard { margin-top: 0; }
-    .photo .mono { font-size: 44px; }
+    .intro-side { padding-top: 4px; display: grid; grid-template-columns: 112px 1fr; gap: 16px; align-items: start; }
+    .factcard { margin-top: 0; padding-top: 0; border-top: none; }
+    .photo .mono { font-size: 38px; }
+    .now-grid { grid-template-columns: 1fr; }
+    .now-grid .item:nth-child(odd) { border-right: none; }
+    .now-grid .item:nth-child(even) { padding-left: 0; }
+    .now-grid .item:nth-last-child(-n+2) { border-bottom: 1px solid var(--rule); }
+    .now-grid .item:last-child { border-bottom: none; }
   }
   @media print {
     @page { size: letter; margin: 10mm 12mm; }
@@ -212,18 +214,17 @@
 
     /* Flatten tinted fills so the PDF is clean white, not blocks of color
        that get clipped at page breaks. Borders and accent color still print. */
-    .now, .cred-cell, .photo { background: #fff; }
+    .cred-cell, .photo { background: #fff; }
     .cred-strip { border-radius: 0; }
 
     .topline { padding-bottom: 7px; font-size: 9.5px; }
 
     /* Compact two-column intro */
-    .intro { grid-template-columns: 1fr 150px; gap: 18px; break-inside: avoid; }
-    .intro-side { padding-top: 7px; }
-    .photo { border-radius: 7px; }
-    .photo .mono { font-size: 40px; }
-    .factcard { margin-top: 9px; }
-    .factcard .fact { padding: 5px 9px; }
+    .intro { grid-template-columns: 1fr 130px; gap: 18px; break-inside: avoid; }
+    .intro-side { padding-top: 6px; }
+    .photo .mono { font-size: 32px; }
+    .factcard { margin-top: 8px; padding-top: 7px; }
+    .factcard .fact { padding: 4px 0; }
     .factcard .ft { font-size: 8.5px; margin-bottom: 1px; }
     .factcard .fv { font-size: 10px; }
 
@@ -235,9 +236,8 @@
     .summary .lead-in { font-size: 11.5px; line-height: 1.36; }
     .summary p { margin-bottom: 5px; }
 
-    .now { margin-top: 11px; padding-top: 9px; }
-    .now .now-label { margin-bottom: 5px; }
-    .now li { font-size: 10px; margin-bottom: 2px; }
+    .now-grid .item { padding: 8px 16px 8px 0; font-size: 9.7px; }
+    .now-grid .item:nth-child(even) { padding-left: 16px; }
 
     h2.sec { margin: 11px 0 2px; padding: 7px 0 4px; font-size: 15px; break-after: avoid; }
     h2.sec .no { font-size: 8.5px; }
@@ -266,7 +266,7 @@
     footer { margin-top: 9px; font-size: 9.5px; }
 
     /* Keep related content on the same page */
-    .summary, .now, .project, .job, .cred-strip, .cta,
+    .summary, .now-grid, .project, .job, .cred-strip, .cta,
     table.skills tr, table.skills td { break-inside: avoid; }
     h2.sec + p, h2.sec + table, h2.sec + .cred-strip { break-before: avoid; }
     .cta a.btn { border: 1px solid var(--ink); color: var(--ink); background: none; }
@@ -295,9 +295,10 @@
     </header>
 
     <div class="summary">
-      <p class="lead-in">Technology has been a constant interest of mine, and security most of all. I have a B.S. in Exercise Science and spent time coaching before deciding to go all-in on IT and security, work that <em>actually fits</em> how I think and what I want to get good at.</p>
-      <p>That coaching background turned out to matter more than I expected: handling clients' personal health information every day showed me, up close, how little protection that data gets at small healthcare practices. That's the problem I keep coming back to. I'm <b>Security+ and Network+ certified</b>, finishing a B.S. in Information Technology at WGU, and studying for <b>CompTIA Project+</b> now. To learn the material for real, I've been building. Five projects so far, each one written up as clearly as I can, so someone else could pick it up and follow the reasoning.</p>
-      <p>I'm looking for my first full-time role in IT or security. I don't have the years yet, so I'm trying to make up for it with effort you can see: things built, documented, and shipped in the open. Being able to explain a problem clearly matters to me as much as finding it.</p>
+      <p class="lead-in">Technology has always interested me, security especially. I have a B.S. in Exercise Science and spent time coaching before going all-in on IT and security instead, since it's just a better fit for how I think.</p>
+      <p>That coaching job mattered more than I expected: handling clients' personal health information every day showed me how little protection that data gets at small healthcare practices, and that's the problem I keep coming back to. I'm <b>Security+ and Network+ certified</b>, finishing a B.S. in Information Technology at WGU, and studying for <b>CompTIA Project+</b> now. To actually learn the material, I started building: five projects so far, each one written up clearly enough that someone else could follow the reasoning.</p>
+      <p>I also think AI is going to change how most businesses operate, not just security teams, and I like digging into where it actually helps versus where it's still overhyped. Building the projects below is where that turned from an opinion into something I've actually practiced: working with AI pushed me toward better implementations than I'd have found alone, and taught me how to direct several AI agents across different systems at once instead of running one at a time. I think that shift, from doing the work yourself to orchestrating it, is going to reshape careers over the next five to ten years, mine included.</p>
+      <p>I'm looking for my next role in IT or security. I'd rather the work make the case than a job title: real projects, documented and public, backed by real certifications. I care about explaining a problem clearly, not just finding it.</p>
     </div>
    </div>
 
@@ -315,14 +316,12 @@
    </aside>
   </div>
 
-  <div class="now">
-    <span class="now-label">Right now</span>
-    <ul>
-      <li>Finishing my <b>B.S. in IT at WGU</b> and studying for <b>CompTIA Project+</b>.</li>
-      <li>Going back over the projects below: tighter tests, clearer docs, and honest notes on their limits.</li>
-      <li>Reading real healthcare breach write-ups and folding what I learn back into the readiness kit.</li>
-      <li>Building <b>Pace</b>, an Apple Watch lifting-tempo coach, to teach myself Swift and on-device signal processing.</li>
-    </ul>
+  <h2 class="sec">Right now <span class="no">00</span></h2>
+  <div class="now-grid">
+    <div class="item">Finishing my <b>B.S. in IT at WGU</b> and studying for <b>CompTIA Project+</b>.</div>
+    <div class="item">Going back over the projects below: tighter tests, clearer docs, honest notes on their limits.</div>
+    <div class="item">Reading real healthcare breach write-ups and folding what I learn back into the readiness kit.</div>
+    <div class="item">Building <b>Pace</b>, an Apple Watch lifting-tempo coach, to teach myself Swift and on-device signal processing.</div>
   </div>
 
   <h2 class="sec">Skills &amp; knowledge <span class="no">01</span></h2>
@@ -380,7 +379,7 @@
       <span class="ptag">Public · CI + demo UI</span>
     </div>
     <p class="what">Deterministic RBAC, purpose-of-use, BAA, and PHI pattern checks that run before an AI agent executes, with block/redact/proceed paths and audit logs.</p>
-    <p class="learned">to treat AI safety as deterministic checks that run <em>before</em> the model acts, rather than hoping to catch problems after.</p>
+    <p class="learned">to treat AI safety as deterministic checks that run before the model acts, instead of trying to catch problems after.</p>
   </div>
 
   <h2 class="sec">Also building <span class="no">03 · Pace</span></h2>
@@ -422,7 +421,7 @@
   </div>
 
   <div class="cta">
-    <span class="msg">If any of this looks useful to your team, <em>I'd like to hear from you.</em></span>
+    <span class="msg">If any of this looks useful to your team, I'd like to hear from you.</span>
     <a class="btn" href="mailto:itsnmills@gmail.com">itsnmills@gmail.com</a>
   </div>
 

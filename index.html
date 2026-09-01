@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noah Mills | Healthcare IT &amp; Security, St. Louis</title>
-<meta name="description" content="Noah Mills, Security+ and Network+ certified, in St. Louis. Teaching himself healthcare security by building tools with AI: HIPAA readiness and PHI guardrails for AI agents.">
-<meta property="og:title" content="Noah Mills | Healthcare IT &amp; Security">
-<meta property="og:description" content="Security+ / Network+ certified, in St. Louis. Learning healthcare security by building it with AI: HIPAA readiness and PHI guardrails.">
+<title>Noah Mills | Security &amp; IT Support, St. Louis</title>
+<meta name="description" content="Noah Mills, Security+, Network+, ITIL 4 Foundation and Linux Essentials certified, in St. Louis. A ticketed Active Directory service desk lab, plus Python security tools built to learn the domain.">
+<meta property="og:title" content="Noah Mills | Security &amp; IT Support">
+<meta property="og:description" content="Security+, Network+, ITIL 4 and Linux Essentials certified, in St. Louis. A ticketed Active Directory lab and public security tooling.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://itsnmills.github.io/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Noah Mills | Healthcare IT &amp; Security">
-<meta name="twitter:description" content="Security+ / Network+ certified, in St. Louis. Learning healthcare security by building it with AI.">
+<meta name="twitter:title" content="Noah Mills | Security &amp; IT Support">
+<meta name="twitter:description" content="Security+, Network+, ITIL 4 and Linux Essentials certified, in St. Louis. Service desk lab and public security tooling.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c2401b'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' font-weight='bold' fill='%23f3f0e9' text-anchor='middle'%3ENM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +29,7 @@
     --sans: "Archivo", -apple-system, Helvetica, Arial, sans-serif;
     --serif: "Fraunces", Georgia, serif;
     --mono: var(--sans);
+    --code: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -103,6 +104,7 @@
   .project .learned { margin-top: 8px; max-width: 70ch; font-size: 13.5px; color: var(--ink-60); font-style: italic; }
   .project .learned::before { content: "What it taught me: "; font-style: normal; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-40); }
   .project .stack { font-family: var(--mono); font-size: 12px; color: var(--ink-40); margin-top: 8px; }
+  .project code { font-family: var(--code); font-size: .9em; background: var(--paper-2); padding: 1px 5px; border-radius: 3px; }
 
   /* skills */
   table.skills { width: 100%; border-collapse: collapse; }
@@ -123,6 +125,7 @@
   .cred-strip { display: flex; flex-wrap: wrap; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
   .cred-cell { flex: 1 1 200px; padding: 16px 20px; border-right: 1px solid var(--rule); background: var(--paper-2); }
   .cred-cell:last-child { border-right: none; }
+  .cred-strip.edu { margin-top: 10px; }
   .cred-cell .t { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .09em; color: var(--ink-40); }
   .cred-cell .n { font-weight: 600; font-size: 14.5px; margin-top: 3px; }
   .cred-cell .s { font-size: 13px; color: var(--ink-60); }
@@ -170,36 +173,145 @@
     padding: 5px 12px; color: var(--ink);
   }
   .rm-actions button:hover { background: var(--paper-2); }
+  .rm-tabs { display: flex; gap: 6px; }
+  .rm-tab {
+    font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .07em;
+    cursor: pointer; background: none; border: 1px solid var(--rule); border-radius: 999px;
+    padding: 5px 13px; color: var(--ink-60);
+  }
+  .rm-tab:hover { border-color: var(--rule-strong); color: var(--ink); }
+  .rm-tab.is-on { background: var(--ink); border-color: var(--ink); color: var(--paper); }
   dialog#resumeModal iframe { width: 100%; height: calc(100% - 49px); border: none; display: block; background: #fff; }
+  @media (max-width: 560px) {
+    .rm-bar { flex-wrap: wrap; }
+    .rm-bar .rm-title { width: 100%; }
+    dialog#resumeModal iframe { height: calc(100% - 92px); }
+  }
 
   /* intro: prose column + photo/facts column */
-  .intro { display: grid; grid-template-columns: 1fr 210px; gap: 40px; align-items: start; }
+  .intro { display: grid; grid-template-columns: minmax(0, 1fr) 244px; gap: 40px; align-items: start; }
   .intro-main { min-width: 0; }
   .intro-main .summary { max-width: none; }
-  .intro-side { padding-top: 32px; }
-  .photo {
-    position: relative; width: 100%; aspect-ratio: 1 / 1;
-    border: 1px solid var(--rule-strong);
-  }
-  .photo .mono {
-    position: absolute; inset: 0; z-index: 0; display: flex; align-items: center; justify-content: center;
-    font-family: var(--serif); font-weight: 600; font-size: 52px; color: var(--ink); letter-spacing: .02em;
-  }
-  .photo img { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; display: block; }
-  .factcard { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--rule-strong); }
+  .intro-side { padding-top: 34px; }
+  .factcard { padding-top: 14px; border-top: 1px solid var(--rule-strong); }
   .factcard .fact { padding: 8px 0; border-bottom: 1px solid var(--rule); }
   .factcard .fact:last-child { border-bottom: none; }
   .factcard .ft { display: block; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .09em; color: var(--ink-40); margin-bottom: 3px; }
   .factcard .fv { font-size: 13.5px; color: var(--ink); line-height: 1.4; }
   .factcard .fv b { font-weight: 600; }
 
+
+  /* ============================================================
+     Motion layer. Everything here is opt-in: [data-motion="on"]
+     is set by JS only when the visitor has not asked for reduced
+     motion, so no-JS and reduce-motion visitors get the static page.
+     ============================================================ */
+
+  /* paper grain */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: 9; pointer-events: none;
+    opacity: .038; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* reading progress hairline */
+  #prog {
+    position: fixed; top: 0; left: 0; z-index: 20; height: 2px; width: 0;
+    background: var(--accent); opacity: .85;
+  }
+
+  /* section index rail, wide screens only */
+  #rail {
+    position: fixed; left: 26px; top: 50%; transform: translateY(-50%); z-index: 12;
+    display: none; flex-direction: column; gap: 2px;
+  }
+  #rail a {
+    display: flex; align-items: center; gap: 9px; text-decoration: none;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
+    color: var(--ink-40); padding: 5px 0;
+  }
+  #rail .rn { width: 18px; }
+  #rail .rl {
+    max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0;
+    text-transform: uppercase; transition: max-width .45s cubic-bezier(.22,1,.36,1), opacity .3s;
+  }
+  #rail a:hover .rl, #rail a.on .rl { max-width: 150px; opacity: 1; }
+  #rail a.on { color: var(--accent); }
+  #rail a:hover { color: var(--ink); }
+  @media (min-width: 1200px) { #rail { display: flex; } }
+
+  /* availability dot: slow breath, not a strobe */
+  [data-motion="on"] .topline .avail::before { animation: breathe 3.4s ease-in-out infinite; }
+  @keyframes breathe { 0%, 100% { opacity: 1 } 50% { opacity: .3 } }
+
+  /* on-load stagger for the masthead */
+  [data-motion="on"] .lift { opacity: 0; animation: lift .85s cubic-bezier(.22,1,.36,1) forwards; }
+  [data-motion="on"] .lift-1 { animation-delay: .05s }
+  [data-motion="on"] .lift-2 { animation-delay: .16s }
+  [data-motion="on"] .lift-3 { animation-delay: .25s }
+  [data-motion="on"] .lift-4 { animation-delay: .34s }
+  @keyframes lift { from { opacity: 0; transform: translateY(14px) } to { opacity: 1; transform: none } }
+
+  /* scroll reveal */
+  [data-motion="on"] .rev {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+    transition-delay: var(--d, 0ms);
+  }
+  [data-motion="on"] .rev.in { opacity: 1; transform: none; }
+
+  /* section rules draw themselves in */
+  [data-motion="on"] h2.sec { border-bottom-color: transparent; position: relative; }
+  [data-motion="on"] h2.sec::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+    background: var(--rule-strong); transform: scaleX(0); transform-origin: left;
+    transition: transform .95s cubic-bezier(.22,1,.36,1) .1s;
+  }
+  [data-motion="on"] h2.sec.in::after { transform: none; }
+
+  /* project cards: an accent rule slides down the margin on hover */
+  .project { position: relative; }
+  .project::before {
+    content: ""; position: absolute; left: -14px; top: 20px; bottom: 20px; width: 2px;
+    background: var(--accent); transform: scaleY(0); transform-origin: top;
+    transition: transform .4s cubic-bezier(.22,1,.36,1);
+  }
+  .project:hover::before, .project:focus-within::before { transform: none; }
+  .phead h3 a::after { display: inline-block; transition: transform .3s cubic-bezier(.22,1,.36,1); }
+  .project:hover .phead h3 a::after { transform: translate(2px, -2px); }
+
+  /* links: underline sweeps in rather than switching on */
+  .contactline a {
+    position: relative; text-decoration: none;
+    background-image: linear-gradient(var(--accent), var(--accent)),
+                      linear-gradient(var(--rule-strong), var(--rule-strong));
+    background-size: 0% 1px, 100% 1px;
+    background-position: 0 100%, 0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 3px;
+    transition: background-size .35s cubic-bezier(.22,1,.36,1), color .25s;
+  }
+  .contactline a:hover { background-size: 100% 1px, 100% 1px; }
+
+  /* skills rows warm on hover */
+  table.skills tr { transition: background .3s; }
+  table.skills tr:hover td { background: rgba(194,64,27,.045); }
+  table.skills td.k { transition: color .3s; }
+  table.skills tr:hover td.k { color: var(--accent); }
+
+  .cta a.btn { transition: background .25s, transform .25s cubic-bezier(.22,1,.36,1); }
+  .cta a.btn:hover { transform: translateY(-2px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
   @media (max-width: 640px) {
     .job { grid-template-columns: 1fr; gap: 2px; }
     table.skills td.k { width: 130px; }
     .intro { grid-template-columns: 1fr; gap: 20px; }
-    .intro-side { padding-top: 4px; display: grid; grid-template-columns: 112px 1fr; gap: 16px; align-items: start; }
-    .factcard { margin-top: 0; padding-top: 0; border-top: none; }
-    .photo .mono { font-size: 38px; }
+    .intro-side { padding-top: 4px; }
+    #rail, #prog { display: none; }
     .now-grid { grid-template-columns: 1fr; }
     .now-grid .item:nth-child(odd) { border-right: none; }
     .now-grid .item:nth-child(even) { padding-left: 0; }
@@ -214,16 +326,21 @@
 
     /* Flatten tinted fills so the PDF is clean white, not blocks of color
        that get clipped at page breaks. Borders and accent color still print. */
-    .cred-cell, .photo { background: #fff; }
+    .cred-cell { background: #fff; }
+    #rail, #prog, body::before { display: none !important; }
+    .intro { grid-template-columns: 1fr 150px; }
+    .intro-side { padding-top: 0; }
+    .factcard { border-top: none; margin-top: 0; padding-top: 0; }
+    .rev, .lift { opacity: 1 !important; transform: none !important; }
+    h2.sec { border-bottom-color: var(--rule-strong) !important; }
+    h2.sec::after { display: none !important; }
     .cred-strip { border-radius: 0; }
 
     .topline { padding-bottom: 7px; font-size: 9.5px; }
 
     /* Compact two-column intro */
-    .intro { grid-template-columns: 1fr 130px; gap: 18px; break-inside: avoid; }
-    .intro-side { padding-top: 6px; }
-    .photo .mono { font-size: 32px; }
-    .factcard { margin-top: 8px; padding-top: 7px; }
+    .intro { gap: 18px; break-inside: avoid; }
+    .factcard .fact:first-child { padding-top: 0; }
     .factcard .fact { padding: 4px 0; }
     .factcard .ft { font-size: 8.5px; margin-bottom: 1px; }
     .factcard .fv { font-size: 10px; }
@@ -258,6 +375,7 @@
     .job p { font-size: 10px; }
 
     .cred-cell { padding: 6px 10px; }
+    .cred-strip.edu { margin-top: 6px; }
     .cred-cell .n { font-size: 11.5px; }
     .cred-cell .s { font-size: 10px; }
 
@@ -274,91 +392,111 @@
 </style>
 </head>
 <body>
+<div id="prog"></div>
+<nav id="rail" aria-label="Sections">
+  <a href="#s00"><span class="rn">00</span><span class="rl">Right now</span></a>
+  <a href="#s01"><span class="rn">01</span><span class="rl">Skills</span></a>
+  <a href="#s02"><span class="rn">02</span><span class="rl">Building to learn</span></a>
+  <a href="#s03"><span class="rn">03</span><span class="rl">Pace</span></a>
+  <a href="#s04"><span class="rn">04</span><span class="rl">Work history</span></a>
+  <a href="#s05"><span class="rn">05</span><span class="rl">Credentials</span></a>
+</nav>
 <div class="page">
 
   <div class="topline">
-    <span>Healthcare IT · Security · GRC</span>
+    <span>Security · Identity &amp; access · IT support</span>
     <span class="avail">Open to work · 2026</span>
   </div>
 
   <div class="intro">
    <div class="intro-main">
     <header class="masthead">
-      <h1>Noah Mills</h1>
-      <div class="role">Healthcare IT &amp; security · St. Louis, MO</div>
-      <div class="contactline">
+      <h1 class="lift lift-1">Noah Mills</h1>
+      <div class="role lift lift-2">Security &amp; IT support · St. Louis, MO</div>
+      <div class="contactline lift lift-3">
         <a href="mailto:itsnmills@gmail.com">itsnmills@gmail.com</a>
         <span class="sep">·</span><a href="https://github.com/itsnmills" target="_blank" rel="noopener">GitHub</a>
         <span class="sep">·</span><a href="https://linkedin.com/in/noahmills1" target="_blank" rel="noopener">LinkedIn</a>
-        <span class="sep">·</span><a href="Noah_Mills_Resume.pdf" id="resumeOpen">Resume</a>
+        <span class="sep">·</span><a href="Noah_Mills_Resume_IT_Support.pdf" id="resumeOpen">Resume</a>
       </div>
     </header>
 
-    <div class="summary">
+    <div class="summary lift lift-4">
       <p class="lead-in">Technology has always interested me, security especially. I have a B.S. in Exercise Science and spent time coaching before going all-in on IT and security instead, since it's just a better fit for how I think.</p>
-      <p>That coaching job mattered more than I expected: handling clients' personal health information every day is what first got me paying attention to how small healthcare practices protect patient data, and that's the problem I keep coming back to. I'm <b>Security+ and Network+ certified</b>, finishing a B.S. in Information Technology at WGU, and studying for <b>CompTIA Project+</b> now. To actually learn the material, I started building security tools with AI and using the process to teach myself the domain.</p>
+      <p>That coaching job mattered more than I expected: handling clients' personal health information every day is what first got me paying attention to how small healthcare practices protect patient data, and that's the problem I keep coming back to. I'm certified in <b>Security+</b>, <b>Network+</b>, <b>ITIL 4 Foundation</b>, and <b>Linux Essentials</b>, finishing a B.S. in Information Technology at WGU in <b>December 2026</b>, and studying for <b>CompTIA Project+</b> now. To turn that into something I can actually do, I run a ticketed Active Directory lab of my own and build security tools with AI, using both to teach myself the work.</p>
       <p>I also think AI is going to change how most businesses operate, not just security teams, and I like digging into where it actually helps versus where it's still overhyped. Building the projects below is where that turned from an opinion into something I've actually practiced: working with AI pushed me toward better implementations than I'd have found alone, and taught me how to direct several AI agents across different systems at once instead of running one at a time. I think that shift, from doing the work yourself to orchestrating it, is going to reshape careers over the next five to ten years, mine included.</p>
-      <p>I'm looking for my next role in IT or security. I'd rather the work make the case than a job title: real projects, documented and public, backed by real certifications. I care about explaining a problem clearly, not just finding it.</p>
+      <p>I'm looking for my next role in security or IT support. Healthcare is where my interest started, but the pull is really toward regulated, high-stakes environments: health systems, life sciences, platform and reliability teams, anywhere an access decision has to be right and provable. I'd rather the work make the case than a job title: real projects, documented and public, backed by real certifications. I care about explaining a problem clearly, not just finding it.</p>
     </div>
    </div>
 
-   <aside class="intro-side">
-    <div class="photo">
-      <span class="mono">NM</span>
-      <!-- When a real photo is ready: <img src="headshot.jpg" alt="Noah Mills"> -->
-    </div>
+   <aside class="intro-side lift lift-4">
+
     <div class="factcard">
       <div class="fact"><span class="ft">Location</span><span class="fv">St. Louis, MO <span style="color:var(--ink-40)">(Ballwin)</span></span></div>
       <div class="fact"><span class="ft">Status</span><span class="fv">Open to work · 2026</span></div>
-      <div class="fact"><span class="ft">Certified</span><span class="fv"><b>Security+</b> · <b>Network+</b><br>Project+ in progress</span></div>
-      <div class="fact"><span class="ft">Focus</span><span class="fv">Healthcare security · GRC · AI governance</span></div>
+      <div class="fact"><span class="ft">Certified</span><span class="fv"><b>Security+</b> · <b>Network+</b><br><b>ITIL 4</b> · <b>Linux Essentials</b><br>Project+ in progress</span></div>
+      <div class="fact"><span class="ft">Focus</span><span class="fv">Security · identity &amp; access · AI governance</span></div>
     </div>
    </aside>
   </div>
 
-  <h2 class="sec">Right now <span class="no">00</span></h2>
+  <h2 class="sec" id="s00">Right now <span class="no">00</span></h2>
   <div class="now-grid">
-    <div class="item">Finishing my <b>B.S. in IT at WGU</b> and studying for <b>CompTIA Project+</b>.</div>
-    <div class="item">Going back over the projects below: tighter tests, clearer docs, honest notes on their limits.</div>
-    <div class="item">Reading real healthcare breach write-ups and folding what I learn back into the readiness kit.</div>
-    <div class="item">Building <b>Pace</b>, an Apple Watch lifting-tempo coach, to teach myself Swift and on-device signal processing.</div>
+    <div class="item rev">Finishing my <b>B.S. in IT at WGU</b> (December 2026) and studying for <b>CompTIA Project+</b>.</div>
+    <div class="item rev">Working tickets in my own <b>service desk lab</b>: account lifecycle, lockouts, access changes, offboarding, remote admin.</div>
+    <div class="item rev">Reading real healthcare breach write-ups and folding what I learn back into the readiness kit.</div>
+    <div class="item rev">Building <b>Pace</b>, an Apple Watch lifting-tempo coach, to teach myself Swift and on-device signal processing.</div>
   </div>
 
-  <h2 class="sec">Skills &amp; knowledge <span class="no">01</span></h2>
+  <h2 class="sec" id="s01">Skills &amp; knowledge <span class="no">01</span></h2>
   <table class="skills">
-    <tr><td class="k">HIPAA &amp; compliance</td><td class="v">HIPAA Security Rule, ePHI data flow mapping, security risk assessments, vendor and BAA management, policy writing, and remediation planning.</td></tr>
-    <tr><td class="k">Security operations</td><td class="v">Alert triage and prioritization, CVSS, CISA KEV, MITRE ATT&amp;CK mapping, incident documentation, ticketing, and remediation tracking.</td></tr>
-    <tr><td class="k">Identity &amp; access</td><td class="v">Least privilege, role-based access control, MFA, account lifecycle, and evidence-backed access reviews.</td></tr>
-    <tr><td class="k">AI security &amp; governance</td><td class="v">AI vendor risk review, PHI pattern filtering, agent tool permissions, prompt injection risk, and audit logging for AI workflows.</td></tr>
-    <tr><td class="k">Data protection</td><td class="v">AES-256-GCM encryption, SHA-256 integrity verification, redaction, and secure report handoff.</td></tr>
-    <tr><td class="k">Tools &amp; systems</td><td class="v">Python, TypeScript/React, SQL, Git, CI, automated testing. Windows, macOS, Linux, Microsoft 365, Google Workspace.</td></tr>
+    <tr class="rev"><td class="k">Service desk &amp; support</td><td class="v">Owning a ticket queue end to end: triage, prioritization, escalation, and follow-up to resolution. Account provisioning and access requests, password resets, login, MFA, and lockout troubleshooting, onboarding and offboarding, remote administration. Every ticket closed with resolution notes and written up as a runbook.</td></tr>
+    <tr class="rev"><td class="k">Identity &amp; access</td><td class="v">Active Directory and Samba AD, LDAP, Kerberos, OUs and security groups, account lifecycle, least privilege, role-based access control, MFA, evidence-backed access reviews.</td></tr>
+    <tr class="rev"><td class="k">Systems &amp; networking</td><td class="v">Windows, macOS, Linux. TCP/IP, DNS, DHCP, VPN and Tailscale, SSH and headless administration.</td></tr>
+    <tr class="rev"><td class="k">Infrastructure I run</td><td class="v">My lab is self-hosted and I keep it up: Linux server, Docker services, a private tailnet, Git and CI on the project repos, reading logs when something stops answering.</td></tr>
+    <tr class="rev"><td class="k">Security &amp; compliance</td><td class="v">HIPAA Security Rule control mapping, ePHI data flow mapping, vendor and BAA review, audit logging, evidence tracking, remediation planning.</td></tr>
+    <tr class="rev"><td class="k">AI security &amp; governance</td><td class="v">AI vendor risk review, PHI pattern filtering, agent tool permissions, prompt injection risk, and audit logging for AI workflows.</td></tr>
+    <tr class="rev"><td class="k">Tools</td><td class="v">Python, Git, Docker, CI, automated testing, Microsoft 365, Google Workspace, documentation and knowledge base writing.</td></tr>
   </table>
 
-  <h2 class="sec">Building to learn <span class="no">02</span></h2>
-  <p class="value" style="padding: 14px 0 4px; max-width: 70ch;">I learn the material by building tools around it, and I'd rather be straight about how I work than pretend otherwise. I lean on AI heavily for the implementation. The part I'm actually developing is the security judgment: deciding what's worth building, checking whether the output holds up, and understanding where the real risk sits. These are the two I know best and can talk through. Both are public and run on synthetic data, never real PHI.</p>
+  <h2 class="sec" id="s02">Building to learn <span class="no">02</span></h2>
+  <p class="value rev" style="padding: 14px 0 4px; max-width: 70ch;">I learn the material by doing the work around it, and I'd rather be straight about how I work than pretend otherwise. The lab is hands-on task practice: I run the directory and work every ticket myself. For the two Python tools I lean on AI heavily for the implementation, and the part I'm actually developing is the security judgment: deciding what's worth building, checking whether the output holds up, and understanding where the real risk sits. All three are public, and everyone and everything in them is synthetic. No real patient data, ever.</p>
 
-  <div class="project">
+  <div class="project rev">
+    <div class="phead">
+      <h3><a href="https://github.com/itsnmills/service-desk-lab" target="_blank" rel="noopener">Service Desk Lab</a></h3>
+      <span class="ptag">Public · home lab</span>
+    </div>
+    <p class="what">A one-person Tier 1 lab: an osTicket queue and a Samba Active Directory domain controller, both in Docker on my own server and reachable only over my Tailscale network. OUs, security groups, synthetic users, and a lockout policy, administered headless with <code>samba-tool</code> and LDAP over SSH the way real domain controllers are.</p>
+    <p class="value">Six scenarios worked end to end as real tickets: <b>new hire provisioning, password reset, lockout investigation, access change, offboarding, and remote administration</b>, each closed with resolution notes and written up as a runbook.</p>
+    <p class="learned">certs teach concepts, service desk work is tasks. Doing the account lifecycle by hand against a real directory, and writing it down where the next tech could follow it, is what made the identity and ITIL material stick.</p>
+    <p class="stack">osTicket 1.18.4 · Samba AD DC · LDAP / Kerberos · Docker · Tailscale · Linux</p>
+  </div>
+
+  <div class="project rev">
     <div class="phead">
       <h3><a href="https://github.com/itsnmills/small-practice-security-kit" target="_blank" rel="noopener">Small Practice Security Kit</a></h3>
       <span class="ptag">Public · tested</span>
     </div>
-    <p class="what">A local-first tool that turns a small practice's intake answers into a HIPAA readiness packet: where ePHI actually lives, which vendors need BAAs, and a 30/60/90-day action list. Runs on a synthetic clinic profile, never real patient data.</p>
+    <p class="what">A local-first tool that turns a small practice's intake answers into a HIPAA readiness packet: where ePHI actually lives, which vendors need BAAs, which evidence is missing or stale, and a 30/60/90-day action list. Runs on a synthetic clinic profile, never real patient data.</p>
+    <p class="value"><b>30 controls</b> mapped across five families (12 technical, 6 administrative, 6 vendor and BAA, 4 operational, 2 physical), with a <b>127-test suite</b>. The output is written so a non-technical owner can act on it.</p>
     <p class="learned">most of the work here was domain, not code. Reading the HHS Security Rule, 405(d), and CISA's baseline goals closely enough to decide what a small practice actually has to answer is the part I can stand behind.</p>
   </div>
 
-  <div class="project">
+  <div class="project rev">
     <div class="phead">
       <h3><a href="https://github.com/itsnmills/Strands-PHI-Guardrails-Demo" target="_blank" rel="noopener">PHI Guardrails for AI Agents</a></h3>
       <span class="ptag">Public</span>
     </div>
     <p class="what">Deterministic RBAC, purpose-of-use, BAA, and PHI-pattern checks that run before an AI agent is allowed to act, with block, redact, and proceed paths and an audit log.</p>
+    <p class="value"><b>Six clinical roles</b> and <b>16 ALLOW/BLOCK eval cases</b>, all decided by rules rather than by asking a model. Synthetic data only.</p>
     <p class="learned">this one is closest to how I think work is heading. Keeping AI useful in healthcare means putting hard, checkable rules in front of it instead of trusting it to behave, and building this is how I started to see where those rules have to live.</p>
   </div>
 
-  <h2 class="sec">Also building <span class="no">03 · Pace</span></h2>
-  <p class="value" style="padding: 14px 0 4px; max-width: 70ch;">Not everything I build is security work. Pace is a personal project that connects my exercise-science background to the engineering side I'm growing into: an Apple Watch and iPhone app that coaches lifting tempo from wrist motion, entirely on-device.</p>
+  <h2 class="sec" id="s03">Also building <span class="no">03 · Pace</span></h2>
+  <p class="value rev" style="padding: 14px 0 4px; max-width: 70ch;">Not everything I build is security work. Pace is a personal project that connects my exercise-science background to the engineering side I'm growing into: an Apple Watch and iPhone app that coaches lifting tempo from wrist motion, entirely on-device.</p>
 
-  <div class="project">
+  <div class="project rev">
     <div class="phead">
       <h3>Pace</h3>
       <span class="ptag private">Private · in development</span>
@@ -368,15 +506,15 @@
     <p class="stack">Swift · SwiftUI · watchOS · HealthKit · Core Motion · on-device, no network · CI + golden-fixture tests</p>
   </div>
 
-  <h2 class="sec">Work history <span class="no">04</span></h2>
-  <div class="job">
+  <h2 class="sec" id="s04">Work history <span class="no">04</span></h2>
+  <div class="job rev">
     <span class="dates">2023 – present</span>
     <div>
       <b>Delivery Associate</b> <span class="org">· Amazon, St. Louis</span>
-      <p>My day job while I finish my degree and build the projects above. High volume, metrics driven work where I troubleshoot on my own and document everything: access issues, exceptions, escalations, recovery actions.</p>
+      <p>My day job while I finish my degree and build the projects above. High volume, metrics driven work where I troubleshoot scanner, delivery app, navigation, and building and gate access failures on my own: I resolve what I can, escalate what I cannot, and document the recovery so dispatch can pick it up.</p>
     </div>
   </div>
-  <div class="job">
+  <div class="job rev">
     <span class="dates">2022 – 2023</span>
     <div>
       <b>Personal Trainer</b> <span class="org">· The Exercise Coach, St. Louis</span>
@@ -384,16 +522,20 @@
     </div>
   </div>
 
-  <h2 class="sec">Certifications &amp; education <span class="no">05</span></h2>
-  <div class="cred-strip">
+  <h2 class="sec" id="s05">Certifications &amp; education <span class="no">05</span></h2>
+  <div class="cred-strip rev">
     <div class="cred-cell"><div class="t">Certification</div><div class="n">CompTIA Security+</div><div class="s">Certified</div></div>
     <div class="cred-cell"><div class="t">Certification</div><div class="n">CompTIA Network+</div><div class="s">Certified</div></div>
+    <div class="cred-cell"><div class="t">Certification</div><div class="n">ITIL 4 Foundation</div><div class="s">Certified</div></div>
+    <div class="cred-cell"><div class="t">Certification</div><div class="n">LPI Linux Essentials</div><div class="s">Certified</div></div>
     <div class="cred-cell"><div class="t">Certification</div><div class="n">CompTIA Project+</div><div class="s">In progress</div></div>
-    <div class="cred-cell"><div class="t">Degree</div><div class="n">B.S. Information Technology</div><div class="s">WGU, near completion</div></div>
+  </div>
+  <div class="cred-strip edu rev">
+    <div class="cred-cell"><div class="t">Degree</div><div class="n">B.S. Information Technology</div><div class="s">WGU, expected December 2026</div></div>
     <div class="cred-cell"><div class="t">Degree</div><div class="n">B.S. Exercise Science</div><div class="s">Maryville University, 2022</div></div>
   </div>
 
-  <div class="cta">
+  <div class="cta rev">
     <span class="msg">If any of this looks useful to your team, I'd like to hear from you.</span>
     <a class="btn" href="mailto:itsnmills@gmail.com">itsnmills@gmail.com</a>
   </div>
@@ -408,8 +550,12 @@
 <dialog id="resumeModal" aria-label="Resume">
   <div class="rm-bar">
     <span class="rm-title">Resume · Noah Mills</span>
+    <span class="rm-tabs" role="tablist">
+      <button type="button" class="rm-tab is-on" data-pdf="Noah_Mills_Resume_IT_Support.pdf" aria-selected="true">IT support</button>
+      <button type="button" class="rm-tab" data-pdf="Noah_Mills_Resume_Security.pdf" aria-selected="false">Security</button>
+    </span>
     <span class="rm-actions">
-      <a href="Noah_Mills_Resume.pdf" download>Download PDF</a>
+      <a id="resumeDownload" href="Noah_Mills_Resume_IT_Support.pdf" download>Download PDF</a>
       <button id="resumeClose" type="button">Close</button>
     </span>
   </div>
@@ -423,15 +569,88 @@
   var frame = document.getElementById('resumeFrame');
   var close = document.getElementById('resumeClose');
 
+  var dl = document.getElementById('resumeDownload');
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.rm-tab'));
+
+  function show(pdf) {
+    frame.src = pdf;
+    dl.href = pdf;
+    tabs.forEach(function (t) {
+      var on = t.dataset.pdf === pdf;
+      t.classList.toggle('is-on', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () { show(t.dataset.pdf); });
+  });
+
   open.addEventListener('click', function (e) {
     e.preventDefault();
-    if (!frame.src) frame.src = 'Noah_Mills_Resume.pdf';
+    if (!frame.src) show('Noah_Mills_Resume_IT_Support.pdf');
     modal.showModal();
   });
   close.addEventListener('click', function () { modal.close(); });
   modal.addEventListener('click', function (e) {
     if (e.target === modal) modal.close();
   });
+})();
+</script>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+  if (!reduce) root.setAttribute('data-motion', 'on');
+
+
+
+  /* ---------- scroll reveal ---------- */
+  if (!reduce && 'IntersectionObserver' in window) {
+    var revs = document.querySelectorAll('.rev, h2.sec');
+    var ro = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target, sibs, idx = 0;
+        if (el.parentElement) {
+          sibs = Array.prototype.filter.call(el.parentElement.children, function (n) {
+            return n.classList.contains('rev');
+          });
+          idx = Math.min(sibs.indexOf(el), 5);
+        }
+        el.style.setProperty('--d', (idx > 0 ? idx * 70 : 0) + 'ms');
+        el.classList.add('in');
+        ro.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+    Array.prototype.forEach.call(revs, function (el) { ro.observe(el); });
+  } else {
+    Array.prototype.forEach.call(document.querySelectorAll('.rev, h2.sec'), function (el) {
+      el.classList.add('in');
+    });
+  }
+
+  /* ---------- reading progress + section rail ---------- */
+  var prog = document.getElementById('prog');
+  var links = Array.prototype.slice.call(document.querySelectorAll('#rail a'));
+  var heads = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  var ticking = false;
+
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var y = window.scrollY || window.pageYOffset;
+    if (prog) prog.style.width = (h > 0 ? Math.min(y / h, 1) * 100 : 0) + '%';
+    var active = -1;
+    heads.forEach(function (el, i) {
+      if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.35) active = i;
+    });
+    links.forEach(function (a, i) { a.classList.toggle('on', i === active); });
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
 })();
 </script>
 </body>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,31 +8,47 @@
 <meta property="og:title" content="SQL Injection → Unauthenticated Admin Takeover">
 <meta property="og:description" content="Disclosure-style write-up: SQL injection login bypass in OWASP Juice Shop, local lab only, no vendor contacted.">
 <meta property="og:type" content="article">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c2401b'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' font-weight='bold' fill='%23f3f0e9' text-anchor='middle'%3ENM%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d0d0e'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' font-weight='bold' fill='%23f3f0e9' text-anchor='middle'%3ENM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Archivo:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  (function () { try { var t = localStorage.getItem('nm-theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {} })();
+</script>
 <style>
   :root {
-    --paper: #f3f0e9;
-    --paper-2: #ece8de;
+    --paper: #0d0d0e;
+    --paper-2: #17171a;
+    --ink: #ebe8e1;
+    --ink-60: rgba(235,232,225,.72);
+    --ink-40: rgba(235,232,225,.46);
+    --rule: rgba(255,255,255,.1);
+    --rule-strong: rgba(255,255,255,.22);
+    --accent: #ff6a33;
+    --sans: "Geist", -apple-system, Helvetica, Arial, sans-serif;
+    --serif: "Geist", -apple-system, Helvetica, Arial, sans-serif;
+    --code: "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    color-scheme: dark;
+  }
+  [data-theme="light"] {
+    --paper: #f5f3ee;
+    --paper-2: #ece9e1;
     --ink: #16150f;
-    --ink-60: rgba(22,21,15,.64);
-    --ink-40: rgba(22,21,15,.42);
-    --rule: rgba(22,21,15,.16);
-    --rule-strong: rgba(22,21,15,.8);
-    --accent: #c2401b;
-    --sans: "Archivo", -apple-system, Helvetica, Arial, sans-serif;
-    --serif: "Fraunces", Georgia, serif;
-    --code: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --ink-60: rgba(22,21,15,.74);
+    --ink-40: rgba(22,21,15,.5);
+    --rule: rgba(20,18,12,.12);
+    --rule-strong: rgba(20,18,12,.4);
+    --accent: #c9400f;
+    color-scheme: light;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     background: var(--paper); color: var(--ink); font-family: var(--sans);
-    font-size: 15.5px; line-height: 1.65; -webkit-font-smoothing: antialiased;
+    font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased;
   }
   ::selection { background: var(--accent); color: var(--paper); }
-  a { color: var(--accent); }
+  a { color: inherit; text-decoration-color: var(--rule-strong); text-underline-offset: 3px; }
+  a:hover { color: var(--accent); }
 
   .page { max-width: 740px; margin: 0 auto; padding: 40px 24px 72px; }
 
@@ -45,10 +61,10 @@
 
   .kicker {
     font-family: var(--code); font-size: 11.5px; text-transform: uppercase;
-    letter-spacing: .09em; color: var(--accent); margin-bottom: 10px;
+    letter-spacing: .09em; color: var(--ink-40); margin-bottom: 10px;
   }
   h1 {
-    font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 4.2vw, 38px);
+    font-family: var(--serif); font-weight: 500; font-size: clamp(28px, 4.2vw, 40px);
     letter-spacing: -.02em; line-height: 1.12;
   }
   .meta {
@@ -117,7 +133,7 @@
 <body>
 <div class="page">
 
-  <a class="back" href="../index.html#s02">&larr; itsnmills.github.io</a>
+  <a class="back" href="../index.html#projects">&larr; itsnmills.github.io</a>
 
   <div class="kicker">Write-up &middot; local lab, not a real disclosure</div>
   <h1>SQL Injection in Login &rarr; Unauthenticated Admin Takeover</h1>
